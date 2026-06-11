@@ -1,0 +1,45 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Instrument+Serif&display=swap");
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0px;
+  min-height: 100%;
+}
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+
+/* Map Anima font names to Google Fonts */
+@font-face {
+  font-family: "Graphik-Regular";
+  src: local("Inter"), local("Helvetica");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Instrument Serif-Regular";
+  src: local("Instrument Serif");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter-Regular";
+  src: local("Inter");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter-Light";
+  src: local("Inter");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: local("Inter");
+  font-weight: 700;
+}

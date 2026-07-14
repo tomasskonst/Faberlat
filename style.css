@@ -1,0 +1,1072 @@
+/* ==========================================================================
+   FABERLAT — shared stylesheet
+   ========================================================================== */
+
+:root {
+  /* Palette, lifted from the Figma design */
+  --dark:         #353230;   /* header / footer / hero — value pulled from Figma */
+  --dark-2:       #2A2723;   /* slightly deeper, for depth on dark sections */
+  --dark-3:       #56554F;   /* partner section bg — value pulled from Figma */
+  --taupe:        #7F7D74;   /* mid warm-gray section bg — value pulled from Figma */
+  --cream:        #C9C2B3;   /* light beige section bg */
+  --offwhite:     #EEEEEE;   /* pale gray CTA / light section bg — value pulled from Figma (stats + final CTA both use exactly #eee) */
+  --white:        #FFFFFF;
+  --pill:         #C2C2BE;   /* header nav pill bg — value pulled from Figma */
+  --logo-mark:    #9F9389;   /* header logo icon bars — value pulled from Figma */
+  --card-dark:    rgba(0,0,0,0.9); /* near-black card fill on taupe/dark-3 sections */
+  --text-dark:    #2A2723;
+  --text-muted-on-dark: #BDB6AA;
+  --text-muted-on-light: #6B6459;
+  --line-on-dark: rgba(255,255,255,0.14);
+  --line-on-light: rgba(42,39,35,0.14);
+
+  --font-display: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', 'Georgia', serif;
+
+  --container: 1440px; /* real Figma frame width — was approximated at 1180px */
+  --radius: 4px;
+  --radius-btn: 8px;   /* buttons — value pulled from Figma */
+  --radius-card: 13px; /* cards / photo frames — value pulled from Figma */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--offwhite);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 102px; /* real Figma side margin (102px on the 1440px frame) — was approximated at 32px */
+}
+
+/* Focus visibility (accessibility) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Header / nav                                                           */
+/* ---------------------------------------------------------------------- */
+
+.site-header {
+  background: var(--dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 17px 34px 9px; /* exact Figma frame: 100px total = 17 + 74 (pill) + 9 */
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1372px; /* the pill's own fixed width (1440 frame − 34px×2 site-header padding) — must not inherit the shared 1440 container cap or it overgrows past this on wide viewports */
+  height: 74px;
+  padding: 0 68px 0 49px; /* exact Figma pill insets: logo 49px from left, nav 68px from right */
+  background: var(--pill);
+  border-radius: 48px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+}
+
+.logo-mark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.logo-text .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+}
+
+.logo-text .tagline {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted-on-dark);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Header logo/nav sit on the light pill — scoped overrides so the (still dark) footer logo is untouched */
+.site-header .logo {
+  gap: 6.5px;
+  color: var(--text-dark);
+}
+
+.site-header .logo-mark {
+  width: 64.484px;
+  height: 49.358px;
+}
+
+.site-header .logo-text {
+  gap: 7px;
+  line-height: 1;
+}
+
+.site-header .logo-text .name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 25px;
+  letter-spacing: 1.5px;
+  color: var(--text-dark);
+}
+
+.site-header .logo-text .tagline {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  letter-spacing: 0.9px;
+  color: var(--text-dark);
+  text-transform: none;
+  margin-top: 0;
+}
+
+/* Footer logo — Figma's footer instance of this lockup is a distinctly larger scale than the header's */
+.site-footer .logo {
+  gap: 12px;
+}
+
+.site-footer .logo-mark {
+  width: 111px;
+  height: 85px;
+}
+
+.site-footer .logo-text {
+  gap: 10px;
+  line-height: 1;
+}
+
+.site-footer .logo-text .name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: 1.8px;
+}
+
+.site-footer .logo-text .tagline {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  letter-spacing: 1.02px;
+  text-transform: none;
+  margin-top: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 53.5px; /* exact Figma nav-item spacing (measured 53–54px) */
+}
+
+.nav a {
+  color: var(--text-dark);
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  opacity: 1;
+}
+
+.nav a[aria-current="page"] {
+  border-bottom: 1px solid var(--text-dark);
+  padding-bottom: 4px;
+}
+
+.nav .lang {
+  font-size: 18px;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--text-dark);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Hero                                                                    */
+/* ---------------------------------------------------------------------- */
+
+.hero {
+  background: var(--dark);
+  color: var(--white);
+  padding: 88px 0 96px;
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 568fr 668fr; /* Figma: 568px text column + 668px image column, no gap between them */
+  gap: 0;
+  align-items: center;
+}
+
+.hero.hero--text-only .container {
+  grid-template-columns: 1fr;
+}
+
+.hero.hero--text-only h1 {
+  max-width: none; /* the 568px column width below is specific to the two-column hero (Projekti) — kontakti's single-column hero shouldn't inherit it. Two classes here so this reliably beats .hero h1's max-width regardless of source order. */
+}
+
+.hero h1 {
+  font-family: var(--font-body); /* Figma sets this heading in a Light weight, not the base h1's Semibold */
+  font-weight: 300;
+  font-size: clamp(32px, 4vw, 50px);
+  max-width: 568px;
+}
+
+.hero p {
+  margin-top: 20px;
+  max-width: 46ch;
+  color: var(--text-muted-on-dark);
+  font-size: 15px;
+}
+
+.hero .hero-media { aspect-ratio: 668 / 323; }
+
+.hero-media {
+  border-radius: var(--radius-card); /* unified image radius site-wide — was the old, smaller --radius token */
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+/* Home hero — full-bleed photo with text overlaid, per Figma */
+.hero.hero--photo {
+  padding: 40px 0;
+}
+
+.hero--photo .container {
+  display: block;
+  padding: 0 29px; /* the hero photo is a near-full-bleed exception — Figma insets it only 29px, not the standard 102px */
+}
+
+.hero-photo {
+  position: relative;
+  border-radius: var(--radius-card); /* unified site-wide image radius — Figma's hero frame actually specifies 30px, distinct from the 13px every other image uses, but this normalizes to one shared value per request */
+  overflow: hidden;
+  aspect-ratio: 1382 / 645;
+  background: var(--dark-2);
+}
+
+.hero-photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-overlay h1 {
+  position: absolute;
+  left: 5.3%;
+  top: 70.7%;
+  transform: translateY(-50%);
+  width: 43.6%;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(24px, 4.4vw, 70px);
+  line-height: 1.2;
+  color: var(--white);
+  max-width: none;
+}
+
+.hero-note {
+  position: absolute;
+  left: 60.7%;
+  top: 61.9%;
+  transform: translateY(-50%);
+  width: 27%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hero-divider {
+  width: 1px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.hero-note p {
+  margin: 0;
+  min-width: 0;
+  font-size: 15px;
+  line-height: normal; /* Figma sets this text style's line-height to Auto, not a custom multiplier */
+  color: var(--white);
+  max-width: none;
+}
+
+/* placeholder media block — swap the inner <img> for a real photo */
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 10px),
+    linear-gradient(160deg, #4a453e, #221f1c);
+  color: var(--text-muted-on-dark);
+  font-size: 13px;
+  padding: 16px;
+  border: 1px dashed var(--line-on-dark);
+}
+
+.media-placeholder span {
+  max-width: 20ch;
+}
+
+.section--cream .media-placeholder,
+.section--offwhite .media-placeholder {
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,0.04) 0 2px, transparent 2px 10px),
+    linear-gradient(160deg, #d9d3c5, #b9b19f);
+  color: var(--text-muted-on-light);
+  border-color: var(--line-on-light);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Generic section shells                                                  */
+/* ---------------------------------------------------------------------- */
+
+.section {
+  padding: 88px 0;
+}
+
+.section--dark    { background: var(--dark);    color: var(--white); }
+.section--dark2   { background: var(--dark-2);  color: var(--white); }
+.section--slate   { background: var(--dark-3);  color: var(--white); }
+.section--taupe   { background: var(--taupe);   color: var(--white); }
+.section--cream   { background: var(--cream);   color: var(--text-dark); }
+.section--offwhite{ background: var(--offwhite);color: var(--text-dark); }
+.section--pill    { background: var(--pill);    color: var(--text-dark); } /* reuses the header pill color — Projekti alternates taupe/pill row backgrounds */
+
+.section-head {
+  margin-bottom: 48px;
+  max-width: 620px;
+}
+
+/* the "Pieredze" heading-to-grid gap in Figma is 54px, not the shared 48px default */
+.section--dark .section-head {
+  margin-bottom: 54px;
+}
+
+.section-head h2 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(28px, 4vw, 50px);
+  line-height: 1.15;
+}
+
+/* Several sections in the Figma file use a wide, centered heading rather than the default left-aligned one */
+.section-head--center {
+  max-width: none;
+  text-align: center;
+}
+
+.section--dark .section-head p,
+.section--dark2 .section-head p,
+.section--slate .section-head p,
+.section--taupe .section-head p {
+  color: var(--text-muted-on-dark);
+}
+
+.section--cream .section-head p,
+.section--offwhite .section-head p {
+  color: var(--text-muted-on-light);
+}
+
+.section-head p { margin-top: 12px; font-size: 15.5px; }
+
+/* ---------------------------------------------------------------------- */
+/* Solutions cards (home)                                                  */
+/* ---------------------------------------------------------------------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.solution-card {
+  background: var(--card-dark);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  padding: 20px;
+}
+
+.solution-card .card-media {
+  aspect-ratio: 353 / 312;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.solution-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.solution-card .card-body {
+  padding: 28px 0 4px 8px; /* asymmetric on purpose: the paragraph's own max-width (set inline per card) needs room on the right, not padding */
+}
+
+.solution-card h3 {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.solution-card p {
+  font-size: 15px;
+  line-height: normal; /* Figma sets this text style's line-height to Auto, not a custom multiplier */
+  color: var(--white);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Mini project cards (home — "Pieredze, uz kuru var paļauties")          */
+/* ---------------------------------------------------------------------- */
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 49px;
+}
+
+.mini-card .card-media {
+  aspect-ratio: 272 / 158;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.mini-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mini-card .card-media.is-collage img {
+  width: 50%;
+  flex: 1 1 50%;
+}
+
+.mini-card h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 25px;
+}
+
+.mini-card .meta {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.mini-card .meta .label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.85;
+}
+
+.mini-card .meta + .meta { margin-top: 2px; }
+
+.section-footer {
+  margin-top: 33px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Buttons                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-btn);
+  font-size: 15px;
+  font-weight: 400; /* every button label in Figma is Inter Regular, never Semibold */
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, border-color .15s ease;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn--primary {
+  background: var(--cream);
+  color: var(--text-dark);
+}
+.btn--primary:hover { background: #ddd7c9; }
+
+.btn--outline {
+  background: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+.btn--outline:hover { background: rgba(255,255,255,0.08); }
+
+.btn--dark {
+  background: #000;
+  color: var(--white);
+  border-color: rgba(0,0,0,0.5);
+}
+.btn--dark:hover { background: #1a1a1a; }
+
+.btn--taupe {
+  background: var(--taupe);
+  color: var(--white);
+  border-color: var(--taupe);
+}
+.btn--taupe:hover { background: #726f65; }
+
+.btn--slate {
+  background: var(--dark-3);
+  color: var(--white);
+  border-color: var(--dark-3);
+}
+.btn--slate:hover { background: #47463f; }
+
+/* "Skatīt vairāk" now matches the other buttons' 15px text size (Figma was updated from 13px to 15px).
+   Padding (7px 29px) is unchanged — it was pixel-verified separately and not part of this fix. */
+.section-footer .btn { font-size: 15px; line-height: normal; padding: 7px 29px; }
+
+.section--cream .btn--outline:hover,
+.section--offwhite .btn--outline:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Stats ("Pieredze skaitļos")                                             */
+/* ---------------------------------------------------------------------- */
+
+.stats-bar {
+  background: var(--taupe);
+  border-radius: var(--radius-card);
+  padding: 52px 92px 49px; /* horizontal inset corrected from 56px — pixel-verified against Figma's real column start positions */
+}
+
+.stats-bar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* equal thirds — a nonzero gap would push the column boundary (and the divider that sits on it) past the true 1/3 and 2/3 points, so spacing comes from item padding instead */
+  gap: 0;
+}
+
+.stat-item {
+  text-align: left;
+  padding-right: 40px;
+}
+
+.stat-item:not(:first-child) {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  padding-left: 40px;
+}
+
+.stat-item .num {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: normal; /* Figma sets this text style's line-height to Auto, not a tight 1 */
+  color: var(--white);
+}
+
+.stat-item .label {
+  margin-top: 36px;
+  font-size: 15px;
+  color: var(--white);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Split section ("No idejas, līdz realizācijai")                         */
+/* ---------------------------------------------------------------------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 421fr 759fr; /* Figma's split is not 50/50 — text column is 421px, photo column 759px */
+  gap: 56px;
+  align-items: center;
+}
+
+.split h2 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(28px, 5vw, 50px);
+  line-height: 1.1;
+  max-width: 16ch;
+}
+
+.split p {
+  margin-top: 65px;
+  color: var(--white);
+  font-size: 15px;
+  line-height: normal; /* Figma sets this text style's line-height to Auto, not a custom multiplier */
+  max-width: 42ch;
+}
+
+.split .btn {
+  margin-top: 65px;
+  padding: 7px 38px; /* this button's own padding is far more generous than the shared 13px/26px default */
+}
+
+.split .hero-media { aspect-ratio: 759 / 428; }
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Partner cards                                                          */
+/* ---------------------------------------------------------------------- */
+
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 999px; /* partner cards don't fill the full content width in Figma — they're centered in a narrower column */
+  margin: 0 auto;
+}
+
+.partner-card {
+  background: var(--card-dark);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  padding: 32px 38px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-card h3 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 40px;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.partner-card .card-media {
+  aspect-ratio: 407 / 142;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.partner-card .card-media img {
+  width: 50%;
+  height: 100%;
+  flex: 1 1 50%;
+  object-fit: cover;
+}
+
+.partner-card p {
+  font-size: 15px;
+  line-height: normal; /* Figma sets this text style's line-height to Auto, not a custom multiplier */
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.partner-card .btn {
+  align-self: flex-start;
+  padding-top: 8px; /* Figma's box math implies 11px, but the browser's real "normal" line-height for this font/size renders taller than Figma's own text-box height — 8px is what actually reproduces Figma's 35px total button height in a real browser */
+  padding-bottom: 8px;
+  line-height: normal; /* was inheriting body's 1.55 (23.25px line box), inflating height well past the padding */
+}
+
+/* ---------------------------------------------------------------------- */
+/* Final CTA band                                                          */
+/* ---------------------------------------------------------------------- */
+
+.cta-band {
+  background: var(--offwhite);
+  padding: 88px 0;
+  text-align: center;
+}
+
+.cta-band .btn {
+  padding-left: 45.5px; /* Figma's horizontal padding for this specific button (146px rect, ~55px text) */
+  padding-right: 45.5px;
+  padding-top: 8px; /* Figma's box math implies 11px, but the browser's real "normal" line-height for this font/size renders taller than Figma's own text-box height — 8px is what actually reproduces Figma's 35px total button height in a real browser */
+  padding-bottom: 8px;
+  line-height: normal; /* was inheriting body's 1.55 (23.25px line box), inflating height well past the padding */
+}
+
+.cta-band h2 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(28px, 4vw, 50px);
+}
+
+.cta-band p {
+  margin: 14px auto 30px;
+  max-width: 46ch;
+  color: var(--text-dark);
+  font-size: 15px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Footer                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.site-footer {
+  background: var(--dark);
+  color: var(--white);
+  padding: 40px 0;
+}
+
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer .foot-tag {
+  font-size: 12.5px;
+  color: var(--text-muted-on-dark);
+  margin-top: 4px;
+}
+
+.site-footer .foot-contact {
+  text-align: right;
+  font-size: 14px;
+}
+
+.site-footer .foot-contact div + div { margin-top: 4px; }
+
+/* ---------------------------------------------------------------------- */
+/* Projekti page — alternating project rows                               */
+/* ---------------------------------------------------------------------- */
+
+.project-row {
+  padding: 47px 0; /* Figma: each row frame is 488px tall around a fixed 394px-tall photo — 47px top/bottom, not a full-viewport-height section */
+}
+
+.project-row .container {
+  display: grid;
+  /* Figma's photo block is a fixed 722px, not half the row — text column gets the remaining 458px (1236 - 56 gap - 722) */
+  grid-template-columns: 458fr 722fr;
+  gap: 56px;
+  align-items: start; /* Figma anchors the text column near the top of the row, not vertically centered against the photo */
+}
+
+.project-row .container > *:not(.hero-media) {
+  margin-top: 24px; /* Figma: heading top sits ~20-30px below the photo's top edge, not flush with it */
+}
+
+/* Rows alternate by DOM order alone (image div first vs. text div first in the HTML) —
+   this just mirrors the column-width ratio to match, no direction:rtl trick needed. */
+.project-row.reverse .container {
+  grid-template-columns: 722fr 458fr;
+}
+
+.project-row h3 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.2;
+  max-width: 430px;
+}
+
+.project-row .specs {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  line-height: 1.5; /* Figma: lines are stacked with 0 margin, just their own line-height — no extra gap between them */
+}
+
+.project-row .specs .label {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+  opacity: 0.75;
+  margin-right: 6px;
+}
+
+.project-row .specs .highlight {
+  font-weight: 700;
+}
+
+.project-row .badge {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  opacity: 0.85;
+  width: fit-content;
+}
+
+.project-row .hero-media { aspect-ratio: 722 / 394; }
+
+/* Generic 2-photo collage helper — same pattern as mini-card/partner-card, reused here for project-row images */
+.is-collage { display: flex; }
+.is-collage img {
+  height: 100%;
+  object-fit: cover;
+  min-width: 0; /* without this, a photo's intrinsic aspect ratio can force it wider than its flex-basis %, starving its neighbor */
+}
+
+/* ---------------------------------------------------------------------- */
+/* Contact page — Figma's kontakti frame is one continuous dark block      */
+/* (heading + dividers + info columns), not a separate card-grid section  */
+/* ---------------------------------------------------------------------- */
+
+.hero.hero--contact h1 {
+  text-align: center;
+  max-width: 867px; /* Figma: reproduces the real 2-line wrap point, not the full container width. Two classes here so this reliably beats .hero.hero--text-only h1's max-width:none. */
+  margin: 0 auto 85px; /* Figma: gap from heading to the first divider */
+}
+
+.contact-hr {
+  border: none;
+  border-top: 1px solid var(--line-on-dark);
+  width: 81.5%; /* Figma: the rule insets further than the container's own side padding */
+  margin: 0 auto 63px; /* Figma: gap from a divider down to the content that follows it */
+}
+
+/* the closing divider needs the same 63px gap above it (from the last line of text), and none below */
+.contact-hr:last-child { margin-top: 63px; margin-bottom: 0; }
+
+.contact-columns {
+  display: grid;
+  grid-template-columns: 770fr 466fr; /* Figma: not an even split — left column is wider; the two tracks already sum to the full container width, so no extra gap */
+  align-items: start;
+}
+
+.contact-title {
+  font-family: var(--font-body); /* Figma: Inter Regular, not the base heading's Poppins Semibold */
+  font-weight: 400;
+  font-size: 35px;
+}
+
+.contact-title--lg { font-size: 40px; }
+
+.contact-block + .contact-block { margin-top: 81px; } /* Figma: gap between the Adrese block and the Kontakti block */
+
+.contact-block p {
+  margin: 8px 0 0;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--white);
+}
+
+.contact-block a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------------------------------------------------------------------- */
+/* Reveal-on-scroll (subtle, respects reduced motion)                     */
+/* ---------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Responsive                                                              */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 920px) {
+  /* the 102px side margin is exact at Figma's 1440px desktop width; ease it off below that */
+  .container { padding: 0 48px; }
+
+  .card-grid,
+  .mini-grid,
+  .stats-grid,
+  .partner-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .hero .container,
+  .split,
+  .project-row .container,
+  .contact-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .project-row.reverse .container { grid-template-columns: 1fr; }
+
+  .hero-media { order: -1; }
+
+  /* projekti's two-column image hero: image and heading were flush against
+     each other once stacked (desktop's .hero .container has gap: 0) */
+  .hero .hero-media { margin-bottom: 32px; }
+
+  .hero-overlay h1 { width: 62%; }
+  .hero-note { width: 34%; }
+
+  /* kontakti: "Faberlat" and the Adrese/Kontakti column read as one run-on
+     block once stacked to a single column — give them clear separation */
+  .contact-columns > * + * { margin-top: 40px; }
+
+  /* the Adrese/Kontakti headings and body copy carry desktop's fixed px
+     sizes, which are too large once the column is this narrow */
+  .contact-title { font-size: 22px; }
+  .contact-block p { font-size: 15px; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 24px; }
+
+  .nav {
+    position: fixed;
+    inset: 100px 0 auto 0;
+    background: var(--dark);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 32px 28px;
+    gap: 20px;
+    border-bottom: 1px solid var(--line-on-dark);
+    display: none;
+  }
+  .nav.is-open { display: flex; }
+  .nav-toggle { display: block; }
+
+  /* The 49px/68px pill insets are exact at Figma's 1440px desktop width; ease them off on narrow screens */
+  .site-header { padding: 14px 16px 8px; }
+  .site-header .container { padding: 0 20px; }
+
+  /* The dropdown overlay is dark, unlike the header's light pill — links need to go back to white */
+  .nav a { color: var(--white); }
+  .nav a[aria-current="page"] { border-bottom-color: var(--cream); }
+  .nav .lang { opacity: 0.55; }
+
+  .card-grid,
+  .mini-grid,
+  .stats-grid,
+  .stats-bar-grid,
+  .partner-grid { grid-template-columns: 1fr; }
+
+  /* Stacked instead of squeezed into 3 cramped columns — the fixed 92px card
+     padding + per-item padding left almost no room for "100%" at phone widths */
+  .stats-bar { padding: 32px 24px; }
+
+  .stat-item { padding-right: 0; }
+
+  .stat-item:not(:first-child) {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+
+  /* the desktop labels carry inline max-width px values (tuned to Figma's narrow
+     3-column widths) — at mobile's full-width single column those force uneven,
+     overly-tight wraps, so let them use the real available width instead */
+  .stat-item .label { max-width: none !important; }
+
+  .contact-block + .contact-block { margin-top: 40px; }
+
+  .section { padding: 64px 0; }
+  .hero { padding: 56px 0 64px; }
+  .hero.hero--photo { padding: 0; }
+  .cta-band { padding: 64px 0; }
+
+  .hero-photo { aspect-ratio: 3 / 4; }
+
+  .hero-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 28px 20px 32px;
+    background: linear-gradient(180deg, rgba(30,28,26,0) 40%, rgba(20,18,17,0.8));
+  }
+
+  .hero-overlay h1,
+  .hero-note {
+    position: static;
+    transform: none;
+    width: 100%;
+    left: auto;
+    top: auto;
+  }
+
+  .hero-note { align-items: flex-start; }
+  .hero-divider { height: 48px; }
+
+  .site-footer .container {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .site-footer .foot-contact { text-align: left; }
+}
